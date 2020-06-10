@@ -21,7 +21,7 @@ public class GameSceneManager : IScene
     // 前のシーンに遷移する関数
     public IScene BackScene()
     {
-        return new TitleSceneManager();
+        return new SelectSceneManager();
     }
 
     // 現在のシーンに入れ子になってるシーンに遷移する関数

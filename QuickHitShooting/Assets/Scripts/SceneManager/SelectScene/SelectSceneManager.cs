@@ -13,7 +13,7 @@ public class SelectSceneManager : IScene
 
     public IScene NextScene()
     {
-        return this;
+        return new GameSceneManager();
     }
 
     public IScene BackScene()

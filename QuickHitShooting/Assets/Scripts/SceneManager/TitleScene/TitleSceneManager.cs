@@ -15,7 +15,7 @@ public class TitleSceneManager : IScene
     // 次のシーンに遷移する関数
     public IScene NextScene()
     {
-        return new GameSceneManager();
+        return new SelectSceneManager();
     }
 
     // 前のシーンに遷移する関数
