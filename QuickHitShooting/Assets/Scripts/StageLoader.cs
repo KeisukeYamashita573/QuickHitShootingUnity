@@ -68,12 +68,12 @@ public class StageLoader : MonoBehaviour
             sInfo.stageData = new List<List<TargetData>>();
             for (int i = 0; i < sInfo.scores.Length; ++i)
             {
-                /// スコアデータを読み込む
+                /// スコアデータを読み込む(4バイト×3)
                 sInfo.scores[i] = br.ReadInt32();
 
-                // プレイヤー名を読み込む
                for (int c = 0; c < sInfo.names.Length; ++c)
                {
+                   // プレイヤー名を読み込む(1バイト×3)
                    sInfo.names[i] += br.ReadChar();
                }
             }
@@ -85,19 +85,24 @@ public class StageLoader : MonoBehaviour
             // 読み込むループ回数で使用するもの
             int wCnt, tCnt;
 
-            /// ウェーブ情報を読み込むループ回数の読み込み
+            /// ウェーブ情報を読み込むループ回数の読み込み(4バイト)
             wCnt = br.ReadInt32();
             for (int w = 0; w < wCnt; ++w)
             {
-                /// 的情報を読み込むループ回数の読み込み
+                /// 的情報を読み込むループ回数の読み込み(4バイト)
                 tCnt = br.ReadInt32();
                 /// 的情報の読み込み
                 for (int t = 0; t < tCnt; ++t)
                 {
+                    /// 的の種類を読み込む(1バイト)
                     tData.type        = (char)br.ReadByte();
+                    /// 的の表示時間を読み込む(4バイト)
                     tData.dispTime    = (int)br.ReadUInt32();
+                    /// 的の消滅時間を読み込む(4バイト)
                     tData.banishTime  = (int)br.ReadUInt32();
+                    /// X座標の読み込み(4バイト)
                     tData.pos.x       = br.ReadInt32();
+                    /// Y座標の読み込み(4バイト)
                     tData.pos.y       = br.ReadInt32();
 
                     /// 的情報の追加
@@ -127,38 +132,44 @@ public class StageLoader : MonoBehaviour
         {
             for (int i = 0; i < sInfo.scores.Length; ++i)
             {
-                /// スコアデータの書き込み
+                /// スコアデータの書き込み(4バイト×3)
                 bw.Write(sInfo.scores[i]);
 
-                /// プレイヤー名の書き込み
                 foreach (char c in sInfo.names[i])
                 {
+                    /// プレイヤー名の書き込み(1バイト×3)
                     bw.Write(c);
                 }
             }
             int wCnt, tCnt;
 
-            /// ウェーブ数の書き込み
+            /// ウェーブ数の書き込み(4バイト)
             wCnt = sInfo.stageData.Count;
             bw.Write(wCnt);
             for (int w = 0; w < wCnt; ++w)
             {
-                /// 的数の書き込み
+                /// 的数の書き込み(4バイト)
                 tCnt = sInfo.stageData[w].Count;
                 bw.Write(tCnt);
 
                 /// 的情報の書き込み
                 for (int t = 0; t < tCnt; ++t)
                 {
+                    /// 的の種類の書き込み(1バイト)
                     bw.Write(sInfo.stageData[w][t].type);
+                    /// 的の出現時間の書き込み(4バイト)
                     bw.Write(sInfo.stageData[w][t].dispTime);
+                    /// 的の消滅時間の書き込み(4バイト)
                     bw.Write(sInfo.stageData[w][t].banishTime);
-                    bw.Write(sInfo.stageData[w][t].pos.x);
-                    bw.Write(sInfo.stageData[w][t].pos.y);
+                    /// X座標の書き込み(4バイト)
+                    bw.Write((int)sInfo.stageData[w][t].pos.x);
+                    /// Y座標の書き込み(4バイト)
+                    bw.Write((int)sInfo.stageData[w][t].pos.y);
                 }
             }
         }
         /* ファイル操作を終了する */
+        Debug.Log("書き込みが正常に終了したよ");
     }
 
     // ステージ数の取得
