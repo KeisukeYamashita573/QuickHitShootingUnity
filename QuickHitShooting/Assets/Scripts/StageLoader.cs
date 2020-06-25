@@ -37,10 +37,6 @@ public class StageLoader : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Save(stageInfos[0]);
-        }
     }
 
     private void StageInit()
@@ -179,8 +175,8 @@ public class StageLoader : MonoBehaviour
     }
 
     // ステージデータの取得
-    List<List<TargetData>> GetStage(int num)
+    public StageInfo GetStageInfo(int num)
     {
-        return stageInfos[num].stageData;
+        return stageInfos[num];
     }
 }
