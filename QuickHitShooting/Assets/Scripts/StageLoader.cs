@@ -37,6 +37,7 @@ public class StageLoader : MonoBehaviour
 
     void Update()
     {
+        int debug = 0;
     }
 
     private void StageInit()
