@@ -72,7 +72,7 @@ namespace Deg
         private void Update()
         {
 #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
                 NextScene();
             }
